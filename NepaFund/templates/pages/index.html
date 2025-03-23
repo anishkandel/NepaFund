@@ -1,0 +1,170 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load humanize %}
+{% block title %}| Welcome{% endblock %}</title>
+{% block content %}
+
+ <!-- Alerts -->
+ {% include 'partials/alerts.html' %}
+ <section id="showcase">
+    <div class="background_img" style="background-image:url({% static 'img/app/building.jpg' %})"></div>
+    <div class="container text-center">
+     <div class="home-search p-5">
+        <div class="overlay p-5">
+          <h1 style="font-weight:bold;" class="display-4 mb-4">
+           NepaFund-Startups, Investment & Financial Solutions
+          </h1>
+          <p class="lead">The digital wallet and card helping you effortlessly manage your finances; store, buy, invest, cash-out and spend crypto.</p>
+          <div class="search">
+            <form action="{% url 'search' %}">
+              <!-- Form Row 1 -->
+              <div class="form-row">
+                <div class="col-md-4 mb-3">
+                  <!-- <div class="background_image"
+                  style="background-image:url({% static 'img/ap/about.jpg' %})"></div> -->
+                  <label class="sr-only">Upcoming Projects</label>
+                  <input type="text" name="keywords" class="form-control" placeholder="Upcoming Projects">
+                </div>
+
+                <div class="col-md-4 mb-3">
+                  <label class="sr-only">Active Projects</label>
+                  <input type="text" name="city" class="form-control" placeholder="Active Projects">
+                </div>
+
+                <div class="col-md-4 mb-3">
+                  <label class="sr-only">All Time</label>
+                  <select name="bedrooms" class="form-control">
+                    <option selected="true" disabled="disabled">All Time</option>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                    <option>6</option>
+                    <option>7</option>
+                    <option>8</option>
+                    <option>9</option>
+                    <option>10</option>
+                 </select>
+                </div>
+              </div>
+              <!-- Form Row 2 -->
+              <div class="form-row">
+                <div class="col-md-6 mb-3">
+                <label class="sr-only">State</label>
+                <select name="state" class="form-control">
+                  <option selected="true" disabled="disabled">Categories</option>
+                  {% for key,value in state_choices.items %}
+                  <option value="{{ key }}">{{value}}</option>
+                  {% endfor %}
+                </select>
+                </div>
+                <div class="col-md-6 mb-3">
+                  <select name="price" class="form-control" id="type">
+                    <option selected="true" disabled="disabled">Price Filter</option>
+                    {% for key,value in price_choices.items %}
+                    <option value="{{ key }}">{{value}}</option>
+                    {% endfor %}
+                  </select>
+                </div>
+              </div>
+              <button class="btn btn-secondary btn-block mt-4" type="submit">Find</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <br>
+ 
+  <!-- Investment Platforms-->
+  <section id="listings" class="py-5">
+    <div class="container">
+      <h3 class="text-center mb-3">Latest Investment Projects</h3>
+      <div class="row">
+      {% if platforms %}
+      {% for platform in platforms %}
+       <div class="col-md-6 col-lg-4 mb-4">
+          <div class="card listing-preview">
+            <img class="card-img-top" src="{{platform.photo_main.url}}" alt="">
+            <div class="card-img-overlay">
+              <h2>
+                <span class="badge badge-secondary text-white">Total Fund:{{platform.price | intcomma}}Billion</span>
+              </h2>
+            </div>
+            <div class="card-body">
+              <div class="listing-heading text-center">
+                <h4 class="text-primary">{{platform.title}}</h4>
+                <p>
+                  <i class="fas fa-map-marker text-secondary"></i> {{platform.city}} {{platform.address}}</p>
+              </div>
+              <hr>
+              <div class="row py-2 text-secondary">
+                <div class="col-12 text-align:center">
+                  <i class="fas fa-th-large"></i> Minimum Allocation:&nbsp;&nbsp;&nbsp;{{platform.minprice}}Million</div>
+                <div class="col-12 text-align:center">
+                  <i class="fas fa-car"></i> Maximum Allocation:&nbsp;&nbsp;&nbsp;{{platform.maxprice}}Billion</div>
+              </div>
+               <li class="list-group-item text-secondary">
+                  <i class="fas fa-th-large"></i> Total Supply
+                  <span class="float-right">{{platform.maxprice}}Billion</span>
+                </li>
+                <li class="list-group-item text-secondary">
+                  <i class="fas fa-square"></i> Max Supply
+                  <span class="float-right">{{platform.maxprice}} Billion
+                  </span>
+                </li>
+            
+              <hr>
+              <div class="row py-2 text-secondary">
+                <div class="col-12">
+                  <i class="fas fa-user"></i> {{platform.data}}</div>
+              </div>
+              <div class="row text-secondary pb-2">
+                <div class="col-6">
+                  <i class="fas fa-clock"></i> {{platform.invest_date | timesince}}</div>
+              </div>
+              <hr>
+              <a href="{% url 'platform' platform.id %}" class="btn btn-primary btn-block">More Info</a>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+      {% else %}
+      <div class="col-md-12">
+      <p>No platforms available</p>
+      </div>
+      {% endif %}
+
+      </div>
+    </div>
+  </section>
+
+  <section id="services" class="py-5 bg-secondary text-white">
+    <div class="container">
+      <div class="row text-center">
+        <div class="col-md-4">
+          <i class="fas fa-comment fa-4x mr-4"></i>
+          <hr>
+          <h3>Consulting Services</h3>
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt, debitis nam! Repudiandae, provident iste consequatur
+            hic dignissimos ratione ea quae.</p>
+        </div>
+        <div class="col-md-4">
+          <i class="fas fa-home fa-4x mr-4"></i>
+          <hr>
+          <h3>Propery Management</h3>
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt, debitis nam! Repudiandae, provident iste consequatur
+            hic dignissimos ratione ea quae.</p>
+        </div>
+        <div class="col-md-4">
+          <i class="fas fa-suitcase fa-4x mr-4"></i>
+          <hr>
+          <h3>Renting & Selling</h3>
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt, debitis nam! Repudiandae, provident iste consequatur
+            hic dignissimos ratione ea quae.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+{% endblock %}

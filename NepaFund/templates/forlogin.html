@@ -1,0 +1,42 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="{% static 'css/app/all.css' %}">
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="{% static 'css/app/bootstrap.css' %}">
+   
+    <link rel="stylesheet" href="{% static 'css/app/styles.css' %}">
+    <!-- Lightbox -->
+    <link rel="stylesheet" href="{% static 'css/app/lightbox.min.css' %}">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
+    <title>NepaFund{% block title %}{% endblock %}</title>
+  
+</head>
+<body>
+    <!-- Topbar -->
+   
+
+     <!-- Navbar -->
+     {% include 'partials/_navbarforlogin.html' %} 
+     
+     <!-- main content -->
+    {% block content %} {% endblock %}
+
+      <!-- Footer -->
+    {% include 'partials/_footer.html' %}
+
+    
+ 
+
+ 
+    <script src="{%static 'js/jquery-3.3.1.min.js' %}"></script>
+    <script src="{%static 'js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{%static 'js/main.js' %}"></script>
+    <script src="{%static 'js/lightbox.min.js' %}"></script>
+</body>
+</html>
